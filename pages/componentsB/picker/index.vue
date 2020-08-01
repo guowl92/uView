@@ -10,6 +10,7 @@
 					v-model="show"
 					:defaultRegion="defaultRegion"
 					:params="params"
+					end-year="2030"
 					@confirm="confirm"
 					:defaultSelector="defaultSelector"
 					:range="range"
@@ -116,7 +117,7 @@ export default {
 			this.show = true;
 		},
 		confirm(e) {
-			console.log(e);
+			// console.log(e);
 			this.input = '';
 			if (this.mode == 'time') {
 				if (this.params.year) this.input += e.year;
@@ -177,7 +178,6 @@ export default {
 					this.defaultSelector.splice(2, 1, 0)
 					break
 			}
-			this.$forceUpdate()
 		}
 	}
 };

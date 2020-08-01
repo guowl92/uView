@@ -1,6 +1,9 @@
 <template>
-	<view class="wrap">
-		<u-swiper :list="list"></u-swiper>
+	<view>
+		<u-popup v-model="show" @close="close">
+			<view>出淤泥而不染，濯清涟而不妖</view>
+		</u-popup>
+		<u-button @click="show = true">打开</u-button>
 	</view>
 </template>
 
@@ -8,23 +11,13 @@
 	export default {
 		data() {
 			return {
-				list: [{
-						image: 'https://cdn.uviewui.com/uview/swiper/1.jpg',
-						title: '昨夜星辰昨夜风，画楼西畔桂堂东'
-					},
-					{
-						image: 'https://cdn.uviewui.com/uview/swiper/2.jpg',
-						title: '身无彩凤双飞翼，心有灵犀一点通'
-					},
-					{
-						image: 'https://cdn.uviewui.com/uview/swiper/3.jpg',
-						title: '谁念西风独自凉，萧萧黄叶闭疏窗，沉思往事立残阳'
-					}
-				],
+				show: false
 			}
 		},
 		methods: {
-
+			close() {
+				console.log('close');
+			}
 		}
 	}
 </script>

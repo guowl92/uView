@@ -197,11 +197,13 @@ export default [{
 			path: '/pages/componentsB/sticky/index',
 			icon: 'sticky',
 			title: 'Sticky 吸顶',
-		}, {
+		}, 
+		{
 			path: '/pages/componentsB/waterfall/index',
 			icon: 'waterfall',
 			title: 'Waterfall 瀑布流',
-		}, {
+		},
+		{
 			path: '/pages/componentsB/divider/index',
 			icon: 'divider',
 			title: 'Divider 分割线',
@@ -224,11 +226,15 @@ export default [{
 			path: '/pages/componentsA/tabs/index',
 			icon: 'tabs',
 			title: 'Tabs 标签',
-		}, {
+		}, 
+		// #ifndef MP-ALIPAY
+		{
 			path: '/pages/template/order/index',
 			icon: 'tabsSwiper',
 			title: 'TabsSwiper 全屏选项卡',
-		}, {
+		},
+		// #endif
+		{
 			path: '/pages/componentsC/subsection/index',
 			icon: 'subsection',
 			title: 'Subsection 分段器',
@@ -252,6 +258,10 @@ export default [{
 	}, {
 		groupName: '其他组件',
 		list: [{
+			path: '/pages/componentsA/parse/index',
+			icon: 'parse',
+			title: 'parse 富文本解析器',
+		},{
 			path: '/pages/componentsC/messageInput/index',
 			icon: 'messageInput',
 			title: 'MessageInput 验证码输入',
@@ -261,7 +271,7 @@ export default [{
 			title: 'AvatarCropper 头像裁剪',
 		}, {
 			path: '/pages/componentsC/loadmore/index',
-			icon: 'loadmore',
+			icon: 'loadmore', 
 			title: 'Loadmore 加载更多',
 		}, {
 			path: '/pages/componentsB/readMore/index',
