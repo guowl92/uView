@@ -28,20 +28,6 @@ uView UI，是[uni-app](https://uniapp.dcloud.io/)生态优秀的UI框架，全�
 <br>
 <img src="https://uviewui.com/common/weixin_mini_qrcode.png" width="220" height="220" >
 
-
-## 友情链接
-
-<br>
-
-#### **vue-admin-beautiful** —— [企业级、通用型中后台前端解决方案（基于vue/cli 4 最新版，同时支持电脑，手机，平板）](https://github.com/chuzhixin/vue-admin-beautiful)
-
-#### **vue-admin-beautiful** —— [在线演示](http://beautiful.panm.cn/vue-admin-beautiful/#/index)
-
-#### **pl-table** —— [ 完美解决 element 万级表格数据渲染卡顿问题](https://github.com/livelyPeng/pl-table)
-
-#### **luch-request** —— [基于 Promise 开发的 uni-app 跨平台、项目级别的请求库，它有更小的体积，易用的 api，方便简单的自定义能力](https://www.quanzhan.co/luch-request/)
-<br>
-
 ## 链接
 
 - [官方文档](https://uviewui.com/)
