@@ -1,11 +1,15 @@
 <template>
 	<view class="u-numberbox">
-		<view class="u-icon-minus" @touchstart.stop.prevent="btnTouchStart('minus')" @touchend.stop.prevent="clearTimer" :class="{ 'u-icon-disabled': disabled || inputVal <= min }"
-		    :style="{
-				background: bgColor,
-				height: inputHeight + 'rpx',
-				color: color
-			}">
+		<view class="u-icon-minus"
+		 @touchstart.stop.prevent="btnTouchStart('minus')" 
+		 @touchend.stop.prevent="clearTimer" 
+		 @touchcancel.stop.prevent="clearTimer"
+		 :class="{ 'u-icon-disabled': disabled || inputVal <= min, 'u-btn-border': btnBorder }" 
+		 :style="{
+			 background: bgColor, 
+			 height: inputHeight + 'rpx', 
+			 color: color
+			 }">
 			<u-icon name="minus" :size="size"></u-icon>
 		</view>
 		<input :disabled="disabledInput || disabled" :cursor-spacing="getCursorSpacing" :class="{ 'u-input-disabled': disabled }"
@@ -17,7 +21,11 @@
 				height: inputHeight + 'rpx',
 				width: inputWidth + 'rpx'
 			}" />
-		<view class="u-icon-plus" @touchstart.stop.prevent="btnTouchStart('plus')" @touchend.stop.prevent="clearTimer" :class="{ 'u-icon-disabled': disabled || inputVal >= max }"
+		<view class="u-icon-plus"
+		 @touchstart.stop.prevent="btnTouchStart('plus')"
+		 @touchend.stop.prevent="clearTimer" 
+		 @touchcancel.stop.prevent="clearTimer"
+		 :class="{ 'u-icon-disabled': disabled || inputVal >= max, 'u-btn-border': btnBorder }"
 		    :style="{
 				background: bgColor,
 				height: inputHeight + 'rpx',
@@ -53,7 +61,9 @@
 	 * @event {Function} blur 输入框失去焦点时触发，对象形式
 	 * @event {Function} minus 点击减少按钮时触发(按钮可点击情况下)，对象形式
 	 * @event {Function} plus 点击增加按钮时触发(按钮可点击情况下)，对象形式
-	 * @example <u-number-box :min="1" :max="100"></u-number-box>
+	 * @example <u-number-box :min="1" :max="100"></u-number-box>1
+	 * 
+	 * @property {Boolean} btnBorder 按钮是否显示边框,默认false
 	 */
 	export default {
 		name: "u-number-box",
@@ -138,6 +148,11 @@
 			positiveInteger: {
 				type: Boolean,
 				default: true
+			},
+			// 是否显示按钮边框
+			btnBorder: {
+				type: Boolean,
+				default: false
 			}
 		},
 		watch: {
@@ -155,20 +170,26 @@
 				// 首先判断是否数值，并且在min和max之间，如果不是，使用原来值
 				let tmp = this.$u.test.number(v1);
 				if (tmp && v1 >= this.min && v1 <= this.max) value = v1;
-				else value = v2;
+				else {
+					value = v2;
+				}
 				// 判断是否只能输入大于等于0的整数
 				if(this.positiveInteger) {
 					// 小于0，或者带有小数点，
 					if(v1 < 0 || String(v1).indexOf('.') !== -1) {
 						value = v2;
-						// 双向绑定input的值，必须要使用$nextTick修改显示的值
-						this.$nextTick(() => {
-							this.inputVal = v2;
-						})
+						// // 双向绑定input的值，必须要使用$nextTick修改显示的值
+						// this.$nextTick(() => {
+						// 	this.inputVal = v2;
+						// })
 					}
 				}
-				// 发出change事件
-				this.handleChange(value, 'change');
+				if(this.inputVal == value) {
+					// 发出change事件
+					this.handleChange(value, 'change');
+				} else {
+					this.inputVal = value
+				}
 			}
 		},
 		data() {
@@ -271,20 +292,27 @@
 				// 如果为非0-9数字组成，或者其第一位数值为0，直接让其等于min值
 				// 这里不直接判断是否正整数，是因为用户传递的props min值可能为0
 				if (!/(^\d+$)/.test(value) || value[0] == 0) val = this.min;
-				val = +value;
+				else val = +value;
 				if (val > this.max) {
 					val = this.max;
 				} else if (val < this.min) {
 					val = this.min;
 				}
-				this.$nextTick(() => {
-					this.inputVal = val;
-				})
+				if(this.inputVal == val) {
+					// 发出change事件
+					this.handleChange(val, 'change');
+				} else {
+					this.inputVal = val
+				}
+				// this.$nextTick(() => {
+				// 	this.inputVal = val;
+				// })
 			},
 			handleChange(value, type) {
 				if (this.disabled) return;
 				// 发出input事件，修改通过v-model绑定的值，达到双向绑定的效果
-				this.changeFromInner = true;
+				// this.changeFromInner = true;
+				this.changeFromInner = this.value!=value;
 				this.$emit('input', Number(value));
 				this.$emit(type, {
 					// 转为Number类型
@@ -338,5 +366,8 @@
 	.u-input-disabled {
 		color: #c8c9cc !important;
 		background-color: #f2f3f5 !important;
+	}
+	.u-btn-border{
+		border: 1px solid;
 	}
 </style>
